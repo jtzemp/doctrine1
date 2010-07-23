@@ -390,4 +390,45 @@ class Doctrine_Export_Pgsql extends Doctrine_Export
 		}
         return $query;
     }
+
+    /**
+     * Creates a PostgreSQL schema collection
+     *
+     * @param string $schema_name
+     * @return integer
+     */
+    public function createSchema($schema_name) {
+        return $this->conn->exec($this->createSchemaSql($schema_name));
+    }
+
+    /**
+     * Creates SQL to create a PostgreSQL schema collection
+     *
+     * @param string $schema_name
+     * @return string
+     */
+    public function createSchemaSql($schema_name) {
+        $query = 'CREATE SCHEMA ' . $this->conn->quoteIdentifier($schema_name);
+        return $query;
+    }
+
+    /**
+     * Drops a PostgreSQL schema collection
+     *
+     * @param string $schema_name
+     * @return integer
+     */
+    public function dropSchema($schema_name) {
+        return $this->conn->exec($this->dropSchemaSql($schema_name));
+    }
+
+    /**
+     * Creates SQL to drop a PostgreSQL schema collection
+     *
+     * @param string $schema_name
+     * @return string
+     */
+    public function dropSchemaSql($schema_name) {
+        return $query = "DROP SCHEMA " . $this->conn->quoteIdentifier($schema_name);
+    }
 }

@@ -242,5 +242,26 @@ class Doctrine_Connection_Pgsql extends Doctrine_Connection_Common
                 . ' VALUES (' . implode(', ', $a) . ')';
 
         return $this->exec($query, array_values($fields));
-    }    
+    }
+
+    /**
+     * Create a PostgreSQL schema collection
+     *
+     * @param string $schema_name
+     * @return integer
+     */
+    public function createSchema($schema_name) {
+        $this->export->createSchema($schema_name);
+    }
+
+    /**
+     * Drop a PostgreSQL schema collection
+     *
+     * @param string $schema_name
+     * @return integer
+     */
+    public function dropSchema($schema_name) {
+        $this->export->dropSchema($schema_name);
+    }
+
 }

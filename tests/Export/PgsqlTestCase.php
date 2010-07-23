@@ -175,4 +175,32 @@ class Doctrine_Export_Pgsql_TestCase extends Doctrine_UnitTestCase
 			1 => 'ALTER TABLE "mytable" DROP "oldfield"'
 		));
     }
+	
+	public function testCreateSchemaSql()
+	{
+		$sql = $this->export->createSchemaSql('schema');
+        $this->assertEqual($sql, 'CREATE SCHEMA "schema"');
+        
+	}
+	
+	public function testCreateSchema()
+	{
+		$this->export->createSchema('schema');
+        $this->assertEqual($this->adapter->pop(), 'CREATE SCHEMA "schema"');
+        
+	}
+	
+	public function testDropSchemaSql()
+	{
+		$sql = $this->export->dropSchemaSql('schema');
+        $this->assertEqual($sql, 'DROP SCHEMA "schema"');
+        
+	}
+	
+	public function testDropSchema()
+	{
+		$this->export->dropSchema('schema');
+        $this->assertEqual($this->adapter->pop(), 'DROP SCHEMA "schema"');
+        
+	}
 }
